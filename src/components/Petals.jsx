@@ -1,6 +1,7 @@
 // Decorative falling petals, purely CSS-driven so it never taxes the main
 // thread. Varied size / blur / speed so near petals read larger and sharp,
-// far ones softer and slower.
+// far ones softer and slower. Alternates deep-red rose petals and gold foil
+// flakes -- the same shower the cover lets fall as its doors open.
 const PETAL_COUNT = 12;
 
 function seededPetals(count) {
@@ -13,7 +14,8 @@ function seededPetals(count) {
     const blur = (1 - depth) * 2.2;
     const opacity = 0.35 + depth * 0.55;
     const drift = Math.random() > 0.5 ? 'animate-petal-right' : 'animate-petal-left';
-    return { id: i, left, size, duration, delay, blur, opacity, drift };
+    const petal = i % 3 !== 2;
+    return { id: i, petal, left, size: petal ? size : size * 0.55, duration, delay, blur, opacity, drift };
   });
 }
 
@@ -25,13 +27,15 @@ export default function Petals() {
       {petals.map((p) => (
         <div
           key={p.id}
-          className={`absolute rounded-tl-full rounded-br-full ${p.drift}`}
+          className={`absolute ${p.petal ? 'rounded-tl-full rounded-br-full' : 'rounded-[1px]'} ${p.drift}`}
           style={{
             left: `${p.left}%`,
             top: '-5%',
             width: p.size,
-            height: p.size * 0.7,
-            background: 'linear-gradient(135deg, #f4c9d6, #b05f77)',
+            height: p.petal ? p.size * 0.72 : p.size,
+            background: p.petal
+              ? 'linear-gradient(135deg, #c22f28, #6e1a12)'
+              : 'linear-gradient(135deg, #fff1c4, #e8b05b 50%, #b86637)',
             opacity: p.opacity,
             filter: p.blur ? `blur(${p.blur}px)` : undefined,
             animationDuration: `${p.duration}s`,

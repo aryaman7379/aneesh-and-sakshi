@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette lifted from the live invitation site */
-  --color-maroon: #611522;
-  --color-maroon-light: #8b3a52;
-  --color-rose: #964860;
-  --color-rose-light: #b05f77;
-  --color-gold: #c49d68;
-  --color-gold-dark: #9c7653;
-  --color-cream: #fffbf2;
-  --color-cream-2: #fffcf7;
-  --color-ivory: #f0e6df;
-  --color-stage: #111111;
+  /* Palette sampled from the cover art: saree crimson, zari amber-gold,
+     sherwani ivory. */
+  --color-maroon: #6e1a12;
+  --color-maroon-light: #8f3324;
+  --color-rose: #a8382a;
+  --color-rose-light: #c8604a;
+  --color-gold: #c99245;
+  --color-gold-dark: #93622c;
+  --color-cream: #fdf6e9;
+  --color-cream-2: #fefaf2;
+  --color-ivory: #f3e6cf;
+  --color-stage: #1a0806;
 
   --font-cinzel: "Cinzel", "Cinzel Fallback", serif;
   --font-script: "Mrs Saint Delafield", "Cormorant Garamond", cursive;
@@ -244,7 +245,7 @@ body.gate-locked {
   0%,
   100% {
     transform: scale(1) rotate(-2deg);
-    filter: drop-shadow(0 0 4px rgba(196, 157, 104, 0.55));
+    filter: drop-shadow(0 0 4px rgba(201,146,69, 0.55));
   }
   50% {
     transform: scale(1.08) rotate(2deg);
@@ -310,7 +311,7 @@ body.gate-locked {
   background: linear-gradient(
     105deg,
     transparent 35%,
-    rgba(196, 157, 104, 0.45) 50%,
+    rgba(201,146,69, 0.45) 50%,
     transparent 65%
   );
   animation: gold-sweep 7s ease-in-out infinite;
@@ -337,8 +338,8 @@ body.gate-locked {
   --std-sway: 5.5s;
   --std-draw: 2.8s;
   background:
-    radial-gradient(120% 70% at 50% 0%, rgba(176, 95, 119, 0.28) 0%, transparent 55%),
-    linear-gradient(180deg, #7a1f32 0%, var(--color-maroon) 42%, #3a0c16 100%);
+    radial-gradient(120% 70% at 50% 0%, rgba(194, 47, 40, 0.28) 0%, transparent 55%),
+    linear-gradient(180deg, #7d2216 0%, var(--color-maroon) 42%, #3a0d08 100%);
   color: var(--color-cream);
   padding-top: 2.5rem;
 }
@@ -354,7 +355,7 @@ body.gate-locked {
 }
 
 .std-glow {
-  background: radial-gradient(circle, rgba(196, 157, 104, 0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(201,146,69, 0.22) 0%, transparent 70%);
 }
 
 .std-mandala {
@@ -536,13 +537,13 @@ body.gate-locked {
 
 /* Solid cream + soft gold glow — clearer than shimmer-clipped script on maroon. */
 .std-eyebrow {
-  color: #fffbf2;
+  color: #fdf6e9;
   font-weight: 400;
   text-shadow:
-    0 1px 0 rgba(196, 157, 104, 0.55),
+    0 1px 0 rgba(201,146,69, 0.55),
     0 2px 14px rgba(0, 0, 0, 0.45),
-    0 0 28px rgba(196, 157, 104, 0.35);
-  -webkit-text-stroke: 0.35px rgba(255, 251, 242, 0.35);
+    0 0 28px rgba(201,146,69, 0.35);
+  -webkit-text-stroke: 0.35px rgba(253, 246, 233, 0.35);
   paint-order: stroke fill;
 }
 
@@ -603,7 +604,7 @@ body.gate-locked {
   background: linear-gradient(
     105deg,
     transparent 30%,
-    rgba(255, 251, 242, 0.35) 50%,
+    rgba(253, 246, 233, 0.35) 50%,
     transparent 70%
   );
   transform: translateX(-120%);

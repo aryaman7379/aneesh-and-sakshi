@@ -76,23 +76,23 @@ export function SpeakerIcon({ muted = false, className = 'h-5 w-5' }) {
 export function Diya({ className = 'h-8 w-8' }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
-      <ellipse cx="24" cy="34" rx="16" ry="6" fill="#8b3a52" opacity="0.35" />
+      <ellipse cx="24" cy="34" rx="16" ry="6" fill="#8f3324" opacity="0.35" />
       <path
         d="M8 30c2 6 10 9 16 9s14-3 16-9c-3 2-9 3-16 3s-13-1-16-3Z"
-        fill="#9c7653"
-        stroke="#c49d68"
+        fill="#93622c"
+        stroke="#c99245"
         strokeWidth="1"
       />
-      <path d="M12 29c1.5-2 6-3.5 12-3.5S34.5 27 36 29" fill="none" stroke="#c49d68" strokeWidth="0.8" opacity="0.7" />
+      <path d="M12 29c1.5-2 6-3.5 12-3.5S34.5 27 36 29" fill="none" stroke="#c99245" strokeWidth="0.8" opacity="0.7" />
       <g className="diya-flame" style={{ transformOrigin: '24px 22px' }}>
         <path
           d="M24 8c4 6 6 9 6 12a6 6 0 1 1-12 0c0-3 2-6 6-12Z"
-          fill="#f4c9d6"
+          fill="#f3c983"
           opacity="0.95"
         />
         <path
           d="M24 14c2 3.2 3.2 5 3.2 7a3.2 3.2 0 1 1-6.4 0c0-2 1.2-3.8 3.2-7Z"
-          fill="#c49d68"
+          fill="#c99245"
         />
       </g>
     </svg>
@@ -117,8 +117,8 @@ export function Garland({ className = '', delay = 0, flip = false }) {
       />
       {[18, 36, 54, 72, 90].map((y, i) => (
         <g key={y} transform={`translate(20 ${y})`}>
-          <circle r="5" fill={i % 2 ? '#c49d68' : '#b05f77'} opacity="0.85" />
-          <circle r="2" fill="#fffbf2" opacity="0.7" />
+          <circle r="5" fill={i % 2 ? '#c99245' : '#c8604a'} opacity="0.85" />
+          <circle r="2" fill="#fdf6e9" opacity="0.7" />
         </g>
       ))}
     </svg>

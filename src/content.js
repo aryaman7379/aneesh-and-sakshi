@@ -17,25 +17,28 @@ function raster(base, width, height) {
 }
 
 export const IMAGES = {
-  // Cover behind the tap-to-open doors. LandingGate draws only the wax seal over it.
-  doorCover: raster('/door', 900, 1600),
+  // Cover behind the tap-to-open doors: the couple's clasped hands, split down
+  // the middle so the doors part at the hands. LandingGate ties a silk ribbon
+  // across it and adds the gold sparkles.
+  doorCover: raster('/door', 704, 1034),
   heroArch: raster('/hero', 900, 1600),
   // Small icon PNG — no AVIF/WebP variants.
   ganesh: { src: '/ganesh.png', width: 300, height: 263 },
 
   // Event card backgrounds (Pexels; free for commercial use, no attribution required).
-  event1: raster('/events/sunshine', 900, 1200),
-  event2: raster('/events/haldi', 900, 1200),
-  event3: raster('/events/mehendi', 900, 1200),
-  event4: raster('/events/wedding', 900, 1200),
+  welcome: raster('/events/promise', 900, 1200),
+  bhaat: raster('/events/sunshine', 900, 1200),
+  sangeet: raster('/events/jaggo', 900, 1200),
+  haldi: raster('/events/haldi', 900, 1200),
+  wedding: raster('/events/wedding', 900, 1200),
 };
 
 export const COUPLE = {
-  partner1: 'Dollsi',
-  partner2: 'Siddharth',
+  partner1: 'Aneesh',
+  partner2: 'Sakshi',
   // Bare monogram, no ampersand: it reads as one interlocked mark in the
   // script face, on the seal and in the hero alike.
-  initials: 'DS',
+  initials: 'AS',
   invocation: '|| श्री गणेशाय नमः ||',
   // One sentence, split where it reads best on a 360px phone; Hero renders each
   // entry as its own line.
@@ -43,120 +46,123 @@ export const COUPLE = {
   announcement: "WE'RE GETTING MARRIED",
 };
 
-// The cover a guest sees before the doors open. The Ganpati, the invocation
-// and the "The beginning of our forever, blessed by God." easel board are all
-// painted into IMAGES.doorCover -- change those by replacing the artwork, not
-// here. The seal's wordmark is the only live text on the cover -- a tap
-// anywhere breaks the seal, so there is no printed prompt.
-export const COVER = {
-  // Cinzel is an all-caps face that renders lowercase as small caps, so the
-  // lowercase "n" comes out short against the full-height PYAAR.
-  brand: 'In PYAAR',
-};
-
 // The formal invitation card, under the hero: the Ganesh shloka, the
 // invitation itself, and both families named the way the printed card names
-// them (D/o, GD/o, S/o, GS/o).
+// them (S/o, Grand S/o, D/o, Grand D/o). The groom's family is listed first.
 export const INVITATION = {
   shloka: [
     'श्री वक्रतुण्ड महाकाय सूर्य कोटि समप्रभा।',
     'निर्विघ्नं कुरु मे देव सर्व-कार्येषु सर्वदा॥',
   ],
   blessing: 'With the blessings of God',
-  intro: 'We cordially invite you to the',
+  intro: 'We request the honor of your presence at the',
   occasion: 'Wedding Ceremony',
-  bride: {
-    name: 'Dollsi Rastogi',
-    parents: 'D/o Mrs. Ragini Rastogi & Mr. Anuj Rastogi',
-    grandparents: 'GD/o Late Smt. Urmila Rastogi & Late Shri. Tara Shankar Rastogi',
-  },
   groom: {
-    name: 'Siddharth Rastogi',
-    parents: 'S/o Late Smt. Sudha Rastogi & Late Shri. Aditya Rastogi',
-    grandparents: 'GS/o Late Smt. Ram Janki Rastogi & Late Shri. Ghanshyam Das Rastogi',
+    name: 'Aneesh',
+    parents: 'S/o Smt. Anita Gupta & Shri Suresh Kumar Gupta',
+    grandparents: 'Grand S/o Late Smt. Sarbati Devi & Late Shri. Ramniwas Gupta',
+  },
+  bride: {
+    name: 'Sakshi',
+    parents: 'D/o Smt. Samta Marodia & Shri Kishan Kumar Marodia',
+    grandparents: 'Grand D/o Smt. Savitri Devi & Late Shri Bajrang Lal Marodia',
   },
 };
 
-// `iso` drives the live countdown (see src/components/Countdown.jsx). Keep the
-// time-of-day on it: a bare "2026-11-26" is parsed as UTC midnight by browsers,
-// which would run the countdown 5.5 hours early in IST.
+// `iso` drives the live countdown (see src/components/Countdown.jsx) and points
+// at the Baarat. Keep the time-of-day on it: a bare "2026-12-10" is parsed as
+// UTC midnight by browsers, which would run the countdown 5.5 hours early in IST.
 export const WEDDING_DATE = {
-  iso: '2026-11-26T21:00:00',
-  display: '26th November 2026',
+  iso: '2026-12-10T17:30:00',
+  display: '8th to 10th December, 2026',
   day: 'THURSDAY',
-  place: 'THE GOLDEN CELEBRATIONS',
+  place: 'HYATT REGENCY, JAIPUR',
 };
 
 export const RSVP_DEADLINE = 'NOVEMBER 15TH';
 
+// Every event is at the Hyatt Regency; `venue` names the hall within it.
 export const EVENTS = [
+  {
+    key: 'welcome',
+    label: 'Welcome Night',
+    title: 'Melodies of Love',
+    subtitle: 'Welcome Night',
+    date: 'Tuesday, 8th December 2026',
+    time: '7:30 PM onwards',
+    venue: 'Regency Ballroom',
+    image: IMAGES.welcome,
+    calendar: {
+      start: '2026-12-08T19:30:00+05:30',
+      end: '2026-12-08T23:30:00+05:30',
+      title: 'Welcome Night — Aneesh & Sakshi',
+      location: 'Regency Ballroom, Hyatt Regency, Mansarovar, Jaipur',
+    },
+  },
+  {
+    key: 'bhaat',
+    label: 'Bhaat Mela',
+    title: 'Pink Symphony',
+    subtitle: 'Bhaat Mela',
+    date: 'Wednesday, 9th December 2026',
+    time: '10:30 AM onwards',
+    venue: 'Navras Bagh',
+    image: IMAGES.bhaat,
+    calendar: {
+      start: '2026-12-09T10:30:00+05:30',
+      end: '2026-12-09T14:00:00+05:30',
+      title: 'Bhaat Mela — Aneesh & Sakshi',
+      location: 'Navras Bagh, Hyatt Regency, Mansarovar, Jaipur',
+    },
+  },
+  {
+    key: 'sangeet',
+    label: 'Sangeet',
+    title: 'Starlit Serenade',
+    subtitle: 'Sangeet',
+    note: 'Tilak @ 6:30 PM onwards',
+    date: 'Wednesday, 9th December 2026',
+    time: 'Sangeet @ 7:30 PM onwards',
+    venue: 'Chauras Bagh',
+    image: IMAGES.sangeet,
+    calendar: {
+      start: '2026-12-09T18:30:00+05:30',
+      end: '2026-12-09T23:30:00+05:30',
+      title: 'Sangeet — Aneesh & Sakshi',
+      location: 'Chauras Bagh, Hyatt Regency, Mansarovar, Jaipur',
+    },
+  },
   {
     key: 'haldi',
     label: 'Haldi',
-    title: 'Haldi',
-    subtitle: 'Turmeric blessings',
-    note: 'Dress code: light blue',
-    date: 'Tuesday, 24 November 2026',
-    time: '12:00 PM',
-    venue: 'Our Residence',
-    image: IMAGES.event2,
-    hideDirections: true,
+    title: 'Carnival Fiesta',
+    subtitle: 'Haldi',
+    date: 'Thursday, 10th December 2026',
+    time: '10:30 AM onwards',
+    venue: 'Navras Bagh',
+    image: IMAGES.haldi,
     calendar: {
-      start: '2026-11-24T12:00:00+05:30',
-      end: '2026-11-24T15:00:00+05:30',
-      title: 'Haldi — Dollsi & Siddharth',
-      location: 'Our Residence',
-    },
-  },
-  {
-    key: 'mehendi',
-    label: 'Mehendi',
-    title: 'Mehendi',
-    subtitle: 'Henna & celebration',
-    date: 'Tuesday, 24 November 2026',
-    time: '5:00 PM onwards',
-    venue: 'Our Residence',
-    image: IMAGES.event3,
-    hideDirections: true,
-    calendar: {
-      start: '2026-11-24T17:00:00+05:30',
-      end: '2026-11-24T22:00:00+05:30',
-      title: 'Mehendi — Dollsi & Siddharth',
-      location: 'Our Residence',
-    },
-  },
-  {
-    key: 'hawan',
-    label: 'Hawan',
-    title: 'Hawan',
-    subtitle: 'Sacred fire & blessings',
-    date: 'Wednesday, 25 November 2026',
-    time: '7:30 PM',
-    venue: 'Jugal Kishore Hall, Chowk',
-    image: IMAGES.event1,
-    // Calendar / ICS only — not shown on the card.
-    calendar: {
-      start: '2026-11-25T19:30:00+05:30',
-      end: '2026-11-25T22:00:00+05:30',
-      title: 'Hawan — Dollsi & Siddharth',
-      location: 'Jugal Kishore Hall, Chowk',
+      start: '2026-12-10T10:30:00+05:30',
+      end: '2026-12-10T14:00:00+05:30',
+      title: 'Haldi — Aneesh & Sakshi',
+      location: 'Navras Bagh, Hyatt Regency, Mansarovar, Jaipur',
     },
   },
   {
     key: 'wedding',
     label: 'Wedding',
-    title: "DS's Happily Ever After",
-    subtitle: 'Together, we begin our forever',
-    note: 'Wedding Ceremony',
-    date: 'Thursday, 26 November 2026',
-    time: '9:00 PM',
-    venue: 'The Golden Celebrations Wedding Lawn',
-    image: IMAGES.event4,
+    title: 'Eternal Knot',
+    subtitle: 'Wedding Soirée',
+    note: 'Baarat @ 5:30 PM onwards',
+    date: 'Thursday, 10th December 2026',
+    time: 'Reception @ 7:30 PM onwards',
+    venue: 'Chauras Bagh',
+    image: IMAGES.wedding,
     calendar: {
-      start: '2026-11-26T21:00:00+05:30',
-      end: '2026-11-27T01:00:00+05:30',
-      title: 'Wedding — Dollsi & Siddharth',
-      location: 'The Golden Celebrations Wedding Lawn',
+      start: '2026-12-10T17:30:00+05:30',
+      end: '2026-12-11T00:00:00+05:30',
+      title: 'Wedding — Aneesh & Sakshi',
+      location: 'Chauras Bagh, Hyatt Regency, Mansarovar, Jaipur',
     },
   },
 ];
@@ -164,17 +170,12 @@ export const EVENTS = [
 // Single source of truth for the venue pin. Both the embed and the
 // “Open in Google Maps” link are built from these coordinates.
 export const VENUE = {
-  name: 'The Golden Celebrations Wedding Lawn',
-  address: 'The Golden Celebrations Wedding Lawn',
-  lat: 26.870327,
-  lng: 80.865654,
-  placeId: '0x399bfd7c8d2d6959:0x7b59277418e32eb',
-  // Place embed (single pin). Prefer this over maps?q=&output=embed, which
-  // Google often refuses to render inside an iframe.
-  embedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.865654!3d26.870327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd7c8d2d6959%3A0x7b59277418e32eb!2sThe%20Golden%20Celebrations%20Wedding%20Lawn!5e0!3m2!1sen!2sin!4v1791218053351!5m2!1sen!2sin',
+  name: 'Hyatt Regency, Mansarovar, Jaipur',
+  address: 'Hyatt Regency, Mansarovar, Jaipur',
+  // TODO: replace the search-based links below with the exact place pin.
+  embedUrl: 'https://www.google.com/maps?q=Hyatt+Regency+Jaipur+Mansarovar&output=embed',
   mapsUrl:
-    'https://www.google.com/maps/place/The+Golden+Celebrations+Wedding+Lawn/data=!4m2!3m1!1s0x399bfd7c8d2d6959:0x7b59277418e32eb',
+    'https://www.google.com/maps/search/?api=1&query=Hyatt+Regency+Jaipur+Mansarovar',
 };
 
 /** Build a Google Calendar deep-link for an event. */
@@ -207,14 +208,14 @@ export function downloadIcs(calOrList, filename = 'event.ics') {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//DollsiSiddharth//Invite//EN',
+    'PRODID:-//AneeshSakshi//Invite//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
   ];
   events.forEach((cal, i) => {
     lines.push(
       'BEGIN:VEVENT',
-      `UID:dollsi-siddharth-${cal.title?.replace(/\W+/g, '-').toLowerCase() || i}@invite`,
+      `UID:aneesh-sakshi-${cal.title?.replace(/\W+/g, '-').toLowerCase() || i}@invite`,
       `DTSTAMP:${stamp}`,
       `DTSTART:${toUtc(cal.start)}`,
       `DTEND:${toUtc(cal.end)}`,
@@ -239,7 +240,7 @@ export function downloadIcs(calOrList, filename = 'event.ics') {
 export function shareWhatsApp(message) {
   const text =
     message ||
-    `You're invited to celebrate Dollsi & Siddharth — 26 November 2026 at The Golden Celebrations Wedding Lawn. ${typeof window !== 'undefined' ? window.location.href : ''}`;
+    `You're invited to celebrate the wedding of Aneesh & Sakshi — 8th to 10th December 2026 at Hyatt Regency, Mansarovar, Jaipur. ${typeof window !== 'undefined' ? window.location.href : ''}`;
   const href = `https://wa.me/?text=${encodeURIComponent(text)}`;
   window.open(href, '_blank', 'noopener,noreferrer');
 }
@@ -251,27 +252,28 @@ export function buildInviteIcsEvents(search) {
     .map((e) => e.calendar);
 }
 
-// Who guests should reach out to. No phone numbers were supplied -- add a
-// `phone` to any entry and RsvpForm will render it as a tap-to-call link.
-// Signed off above the contact names.
+// Printed above the contacts, in remembrance.
 export const RSVP_SIGNOFF = {
-  label: 'Warm Regards',
-  names: 'Anuj Rastogi and Ragini Rastogi',
+  label: 'Always in Our Hearts',
+  names: 'Lt. Mahesh Kumar Gupta & Lt. Ramesh Kumar Gupta',
 };
 
-// The group title shows above its names; the `side` label is no longer printed.
+// The group title shows above its names; a `phone` renders as a tap-to-call link.
 export const RSVP_CONTACTS = [
   {
-    group: 'Celebrating with Joy',
-    side: "BRIDE'S SIDE",
-    people: [{ name: 'Anuj Rastogi' }, { name: 'Ragini Rastogi' }],
+    group: 'Best Compliments From',
+    side: "GROOM'S SIDE",
+    people: [
+      { name: 'Suresh Gupta', phone: '+91 94340 01339' },
+      { name: 'Nikhil Gupta', phone: '+91 70298 56593' },
+    ],
   },
 ];
 
 // Events not everyone is invited to. They are hidden -- both as cards and as
 // RSVP choices -- unless the link carries ?invite=all, so a guest is never
 // shown an event they cannot attend, and never offered it to RSVP for.
-export const FAMILY_ONLY_EVENT_KEYS = ['haldi', 'mehendi'];
+export const FAMILY_ONLY_EVENT_KEYS = [];
 
 // Office links (?invite=office) are for colleagues: they see the wedding
 // ceremony alone, and are not asked to RSVP at all -- see INVITE_MODES below.

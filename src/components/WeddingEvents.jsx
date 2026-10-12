@@ -37,17 +37,15 @@ function EventCard({ event, index }) {
   const captionY = useTransform(scrollYProgress, [0, 1], ['7%', '-7%']);
   const imageDrift = reduced ? {} : { y: imageY, scale: imageScale };
 
-  const directionsUrl =
-    event.key === 'wedding'
-      ? VENUE.mapsUrl
-      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.venue)}`;
+  // Every event is inside the one hotel, so directions always lead there.
+  const directionsUrl = VENUE.mapsUrl;
 
   return (
     <div className="reveal" style={{ '--d': staggerDelay(index) }}>
       <div style={{ perspective: 1100 }}>
         <motion.article
           ref={ref}
-          className={`relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-gold/50 shadow-[0_14px_38px_rgba(97,21,34,0.16)] ${
+          className={`relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-gold/50 shadow-[0_14px_38px_rgba(110,26,18,0.16)] ${
             !reduced ? 'gold-sweep' : ''
           }`}
           initial={
@@ -70,9 +68,9 @@ function EventCard({ event, index }) {
               sizes="(max-width: 440px) 100vw, 400px"
               className="event-card-parallax absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1a060a] via-[#2a0910]/75 to-[#3d1119]/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1c0704] via-[#2c0b06]/75 to-[#401209]/20" />
             {/* Extra solid band behind the caption so pale photos never wash out type. */}
-            <div className="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-[#1a060a]/95 via-[#1a060a]/70 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-[#1c0704]/95 via-[#1c0704]/70 to-transparent" />
           </div>
 
           {/* Diya sits in the open upper area of the Hawan card. */}
@@ -84,7 +82,7 @@ function EventCard({ event, index }) {
 
           <motion.div
             style={reduced ? undefined : { y: captionY }}
-            className="event-card-caption relative z-10 flex h-full flex-col items-center justify-end gap-2.5 px-5 pb-8 text-center text-[#fffbf2]"
+            className="event-card-caption relative z-10 flex h-full flex-col items-center justify-end gap-2.5 px-5 pb-8 text-center text-[#fdf6e9]"
             variants={caption}
             initial="hidden"
             whileInView="show"
@@ -98,34 +96,34 @@ function EventCard({ event, index }) {
             </motion.h3>
             <motion.p
               variants={captionLine}
-              className="font-cinzel text-[15px] font-medium tracking-[0.16em] text-[#fffbf2]"
+              className="font-cinzel text-[15px] font-medium tracking-[0.16em] text-[#fdf6e9]"
             >
               {event.subtitle}
             </motion.p>
             {event.note && (
               <motion.p
                 variants={captionLine}
-                className="mt-0.5 font-cinzel text-[14px] tracking-[0.16em] text-[#f4c9d6]"
+                className="mt-0.5 font-cinzel text-[14px] tracking-[0.16em] text-[#f3c983]"
               >
                 {event.note}
               </motion.p>
             )}
             <motion.p
               variants={captionLine}
-              className="mt-3 font-cinzel text-[15px] font-medium tracking-wide text-[#fffbf2]"
+              className="mt-3 font-cinzel text-[15px] font-medium tracking-wide text-[#fdf6e9]"
             >
               {event.date}
             </motion.p>
             <motion.p
               variants={captionLine}
-              className="font-cinzel text-sm tracking-[0.18em] text-[#fffcf7]"
+              className="font-cinzel text-sm tracking-[0.18em] text-[#fefaf2]"
             >
               {event.time}
             </motion.p>
             {event.venue && (
               <motion.p
                 variants={captionLine}
-                className="mt-2 flex items-center justify-center gap-1.5 font-cormorant text-base font-medium text-[#fffbf2]"
+                className="mt-2 flex items-center justify-center gap-1.5 font-cormorant text-base font-medium text-[#fdf6e9]"
               >
                 <MapPin className="h-3.5 w-3.5 shrink-0" color="currentColor" />
                 {event.venue}
@@ -138,7 +136,7 @@ function EventCard({ event, index }) {
                   href={directionsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#c49d68]/70 bg-[#611522]/95 px-3.5 py-2.5 font-cinzel text-[11px] tracking-widest text-[#fffbf2] shadow-[0_4px_14px_rgba(0,0,0,0.35)] backdrop-blur-sm"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#c99245]/70 bg-[#6e1a12]/95 px-3.5 py-2.5 font-cinzel text-[11px] tracking-widest text-[#fdf6e9] shadow-[0_4px_14px_rgba(0,0,0,0.35)] backdrop-blur-sm"
                 >
                   <DirectionsIcon className="h-3.5 w-3.5" />
                   GET DIRECTIONS

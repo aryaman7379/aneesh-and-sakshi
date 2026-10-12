@@ -7,7 +7,7 @@ import { PAPER } from '../ornamentTokens';
 const FIELD =
   'rounded-lg border border-gold/50 bg-cream/90 px-4 py-3 font-cormorant text-base text-maroon ' +
   'outline-none transition placeholder:text-maroon-light/50 focus:border-gold ' +
-  'focus:shadow-[0_0_0_3px_rgba(196,157,104,0.18)]';
+  'focus:shadow-[0_0_0_3px_rgba(201,146,69,0.18)]';
 const LABEL = 'font-cinzel text-[11px] tracking-widest text-rose';
 
 // The families guests can call to confirm, shown under the form (and on the
@@ -43,7 +43,7 @@ function ContactList() {
                     href={`tel:${person.phone.replace(/\s/g, '')}`}
                     className="font-cormorant text-base text-maroon-light underline underline-offset-4"
                   >
-                    {person.name}
+                    {person.name} ({person.phone})
                   </a>
                 ) : (
                   <span key={person.name} className="font-cormorant text-base text-maroon-light">
@@ -240,7 +240,7 @@ export default function RsvpForm() {
             <div
               className={`flex items-center gap-2 ${FIELD} ${
                 phoneBad ? 'border-red-700/60' : ''
-              } focus-within:border-gold focus-within:shadow-[0_0_0_3px_rgba(196,157,104,0.18)]`}
+              } focus-within:border-gold focus-within:shadow-[0_0_0_3px_rgba(201,146,69,0.18)]`}
             >
               <span className="font-cormorant text-base text-maroon-light">+91</span>
               <input
@@ -303,7 +303,7 @@ export default function RsvpForm() {
               onClick={() => setForm((f) => ({ ...f, attending: 'yes' }))}
               className={`flex-1 rounded-full px-4 py-3 font-cinzel text-xs tracking-widest transition ${
                 form.attending === 'yes'
-                  ? 'bg-maroon text-cream shadow-[0_4px_14px_rgba(97,21,34,0.25)]'
+                  ? 'bg-maroon text-cream shadow-[0_4px_14px_rgba(110,26,18,0.25)]'
                   : 'border border-gold/50 bg-cream/70 text-maroon-light'
               }`}
             >
@@ -314,7 +314,7 @@ export default function RsvpForm() {
               onClick={() => setForm((f) => ({ ...f, attending: 'no' }))}
               className={`flex-1 rounded-full px-4 py-3 font-cinzel text-xs tracking-widest transition ${
                 form.attending === 'no'
-                  ? 'bg-maroon text-cream shadow-[0_4px_14px_rgba(97,21,34,0.25)]'
+                  ? 'bg-maroon text-cream shadow-[0_4px_14px_rgba(110,26,18,0.25)]'
                   : 'border border-gold/50 bg-cream/70 text-maroon-light'
               }`}
             >
@@ -362,7 +362,7 @@ export default function RsvpForm() {
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="mt-1 rounded-full border border-gold/70 bg-maroon px-6 py-4 font-cinzel text-sm tracking-widest text-cream shadow-[0_6px_18px_rgba(97,21,34,0.28)] transition disabled:opacity-60"
+          className="mt-1 rounded-full border border-gold/70 bg-maroon px-6 py-4 font-cinzel text-sm tracking-widest text-cream shadow-[0_6px_18px_rgba(110,26,18,0.28)] transition disabled:opacity-60"
         >
           {status === 'sending' ? 'SENDING…' : 'SEND RSVP'}
         </button>

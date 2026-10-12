@@ -64,7 +64,7 @@ function Party({ party }) {
 }
 
 // The printed invitation, set as one centred column inside a gold cartouche:
-// shloka, blessing, the occasion, then the bride's family and the groom's.
+// shloka, blessing, the occasion, then the groom's family and the bride's.
 export default function Invitation() {
   return (
     <section className="relative w-full overflow-hidden px-4 py-14 text-center" style={PAPER}>
@@ -124,7 +124,7 @@ export default function Invitation() {
             of
           </motion.p>
 
-          <Party party={INVITATION.bride} />
+          <Party party={INVITATION.groom} />
 
           <motion.div variants={fadeUp} className="my-3 flex items-center justify-center gap-3">
             <OrnamentDivider className="h-3 w-24" />
@@ -132,7 +132,7 @@ export default function Invitation() {
             <OrnamentDivider className="h-3 w-24" />
           </motion.div>
 
-          <Party party={INVITATION.groom} />
+          <Party party={INVITATION.bride} />
 
           <motion.div variants={fadeUp} className="mt-7 flex justify-center">
             <OrnamentDivider className="h-4 w-40" />

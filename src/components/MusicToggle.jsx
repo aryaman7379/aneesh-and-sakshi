@@ -9,7 +9,7 @@ export default function MusicToggle({ playing, onToggle }) {
       onClick={onToggle}
       aria-label={playing ? 'Mute music' : 'Play music'}
       aria-pressed={playing}
-      className="fixed z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold/60 bg-cream-2/95 text-maroon shadow-[0_6px_18px_rgba(97,21,34,0.22)] backdrop-blur-sm"
+      className="fixed z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold/60 bg-cream-2/95 text-maroon shadow-[0_6px_18px_rgba(110,26,18,0.22)] backdrop-blur-sm"
       style={{
         right: 'max(1rem, env(safe-area-inset-right))',
         bottom: 'max(1rem, env(safe-area-inset-bottom))',

@@ -122,7 +122,7 @@ function initSaveTheDate(section) {
 }
 
 function buildIcs() {
-  downloadIcs(buildInviteIcsEvents(), 'dollsi-siddharth-wedding.ics');
+  downloadIcs(buildInviteIcsEvents(), 'aneesh-sakshi-wedding.ics');
 }
 
 export default function SaveTheDate() {
@@ -183,13 +183,13 @@ export default function SaveTheDate() {
 
         <div className="std-date mt-7 flex items-baseline justify-center gap-2 font-cinzel text-[2.65rem] leading-none tracking-wide text-cream sm:text-5xl">
           <span className="std-date-part shimmer" style={{ '--d': '0s' }}>
-            26
+            10
           </span>
           <span className="text-gold" aria-hidden="true">
             ·
           </span>
           <span className="std-date-part shimmer" style={{ '--d': '0.12s' }}>
-            11
+            12
           </span>
           <span className="text-gold" aria-hidden="true">
             ·
@@ -199,7 +199,7 @@ export default function SaveTheDate() {
           </span>
         </div>
 
-        <p className="std-meta mt-3 font-cinzel text-[13px] tracking-[0.2em] text-[#e8d4a8] uppercase">
+        <p className="std-meta mt-3 font-cinzel text-[13px] tracking-[0.2em] text-[#f0cf94] uppercase">
           {WEDDING_DATE.day}
         </p>
         <p className="std-meta mt-2 max-w-[18rem] font-cinzel text-xs leading-relaxed tracking-[0.14em] text-cream uppercase">
@@ -210,7 +210,7 @@ export default function SaveTheDate() {
           <OrnamentDivider className="std-divider h-4 w-40 text-gold" />
         </div>
 
-        <p className="std-mini-count mt-5 font-cinzel text-sm tracking-[0.16em] text-[#f0e0b8]">
+        <p className="std-mini-count mt-5 font-cinzel text-sm tracking-[0.16em] text-[#f3d6a0]">
           {daysLeft == null
             ? 'THE DAY IS HERE'
             : daysLeft === 0
@@ -232,8 +232,8 @@ export default function SaveTheDate() {
         <p className="mt-10 font-cormorant text-lg italic leading-snug text-cream">
           We can&apos;t wait to celebrate with you
         </p>
-        <p className="mt-2.5 font-cinzel text-xs tracking-[0.2em] text-[#e8d4a8] uppercase">
-          With love, the Rastogi families
+        <p className="mt-2.5 font-cinzel text-xs tracking-[0.2em] text-[#f0cf94] uppercase">
+          With love, the Gupta &amp; Marodia families
         </p>
 
         <div className="mt-10 flex w-full flex-col items-center gap-3">
