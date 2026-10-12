@@ -85,4 +85,4 @@ Update that to your actual venue name/address.
 - [Tailwind CSS v4](https://tailwindcss.com/) (via `@tailwindcss/vite`)
 - [Framer Motion](https://www.framer.com/motion/) for the fade/scroll reveal
   animations
-# rishit-payal
+# aneesh-sakshi

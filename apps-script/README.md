@@ -40,7 +40,7 @@ in to your own Google account.
 5. Also set who gets the alert emails:
 
    ```js
-   var NOTIFY_EMAIL = 'payal@example.com, rishit@example.com,';
+   var NOTIFY_EMAIL = 'sakshi@example.com, aneesh@example.com,';
    ```
 
    Leave it as `''` to email whoever owns the script. Set `SEND_EMAIL = false`

@@ -1,5 +1,5 @@
 /**
- * RSVP collector for the Payal & Rishit invitation.
+ * RSVP collector for the Sakshi & Aneesh invitation.
  *
  * Paste this into a Google Apps Script project bound to a Google Sheet, then
  * deploy it as a Web App. Setup steps are in apps-script/README.md.
@@ -17,7 +17,7 @@ var SPREADSHEET_ID = '1_5iOssU8M070HCIzdvy8D1tD3CTyHl8oNC0x3qZg1d8';
 var SHEET_NAME = 'RSVPs';
 
 // Who gets an email on every RSVP. Comma-separate for more than one, e.g.
-// 'payal@example.com, rishit@example.com'. Leave blank to email whoever owns
+// 'sakshi@example.com, aneesh@example.com'. Leave blank to email whoever owns
 // the script instead.
 var NOTIFY_EMAIL = 'aryamanyash11@gmail.com, rishitsethi1@gmail.com';
 
