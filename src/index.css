@@ -1,0 +1,687 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette lifted from the live invitation site */
+  --color-maroon: #611522;
+  --color-maroon-light: #8b3a52;
+  --color-rose: #964860;
+  --color-rose-light: #b05f77;
+  --color-gold: #c49d68;
+  --color-gold-dark: #9c7653;
+  --color-cream: #fffbf2;
+  --color-cream-2: #fffcf7;
+  --color-ivory: #f0e6df;
+  --color-stage: #111111;
+
+  --font-cinzel: "Cinzel", "Cinzel Fallback", serif;
+  --font-script: "Mrs Saint Delafield", "Cormorant Garamond", cursive;
+  --font-script-title: "Great Vibes", "Cormorant Garamond", cursive;
+  --font-body: "Cormorant Garamond", "Cinzel Fallback", serif;
+  --font-cormorant: "Cormorant Garamond", "Cinzel Fallback", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-stage);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.gate-locked {
+  overflow: hidden;
+}
+
+.mobile-container {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100svh;
+  position: relative;
+  background: var(--color-cream);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Shared animations (petals, reveal, shimmer, countdown, motifs)
+   ========================================================================== */
+
+@keyframes petal-fall-left {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-40px, 110vh, 0) rotate(-140deg);
+    opacity: 0.35;
+  }
+}
+
+@keyframes petal-fall-right {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(40px, 110vh, 0) rotate(140deg);
+    opacity: 0.35;
+  }
+}
+
+.animate-petal-left,
+.animate-petal-right {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.animate-petal-left {
+  animation-name: petal-fall-left;
+}
+.animate-petal-right {
+  animation-name: petal-fall-right;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--d, 0s);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.in .reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--d, 0s);
+}
+
+.ornament-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ornament-dot {
+  opacity: 0;
+  transition: opacity 0.5s ease 0.55s;
+}
+
+.in .ornament-stroke,
+.reveal.in .ornament-stroke {
+  stroke-dashoffset: 0;
+}
+
+.in .ornament-dot,
+.reveal.in .ornament-dot {
+  opacity: 1;
+}
+
+.shimmer {
+  color: var(--color-maroon);
+  background: linear-gradient(
+    105deg,
+    var(--color-maroon) 0%,
+    var(--color-gold) 45%,
+    var(--color-maroon) 90%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-slide 6s linear infinite;
+}
+
+.std-section .shimmer {
+  color: var(--color-cream);
+  background: linear-gradient(
+    105deg,
+    var(--color-cream) 0%,
+    var(--color-gold) 45%,
+    var(--color-cream) 90%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .shimmer {
+    color: var(--color-maroon);
+    background: none;
+    -webkit-text-fill-color: unset;
+    animation: none;
+  }
+  .std-section .shimmer {
+    color: var(--color-cream);
+  }
+}
+
+@keyframes shimmer-slide {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: -150% 50%;
+  }
+}
+
+@keyframes digit-flip {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  45% {
+    transform: rotateX(90deg);
+    opacity: 0.35;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.digit-flip {
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: digit-flip 0.5s ease;
+}
+
+@keyframes seconds-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+.seconds-pulse {
+  animation: seconds-pulse 1.2s ease-in-out infinite;
+}
+
+.countdown-band {
+  position: relative;
+  isolation: isolate;
+}
+
+.countdown-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%239c7653' stroke-width='1'%3E%3Ccircle cx='32' cy='32' r='10'/%3E%3Cpath d='M32 8c4 8 12 12 20 12-8 4-12 12-12 20-4-8-12-12-20-12 8-4 12-12 12-20z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 64px;
+}
+
+@keyframes diya-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-2deg);
+    filter: drop-shadow(0 0 4px rgba(196, 157, 104, 0.55));
+  }
+  50% {
+    transform: scale(1.08) rotate(2deg);
+    filter: drop-shadow(0 0 8px rgba(240, 200, 140, 0.75));
+  }
+}
+
+.diya-flame {
+  animation: diya-flicker 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes garland-sway {
+  from {
+    transform: rotate(-1.5deg);
+  }
+  to {
+    transform: rotate(1.5deg);
+  }
+}
+
+.garland-sway {
+  transform-origin: top center;
+  animation: garland-sway 5s ease-in-out infinite alternate;
+}
+
+.hero-names {
+  font-size: clamp(2.4rem, 11vw, 4.2rem);
+  max-width: 90%;
+  margin-inline: auto;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.event-card-parallax {
+  will-change: transform;
+}
+
+.event-card-caption {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes gold-sweep {
+  0%,
+  78%,
+  100% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.45;
+  }
+  90% {
+    transform: translateX(220%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.gold-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(196, 157, 104, 0.45) 50%,
+    transparent 65%
+  );
+  animation: gold-sweep 7s ease-in-out infinite;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+}
+
+::selection {
+  background: var(--color-rose-light);
+  color: white;
+}
+
+/* ==========================================================================
+   Save the Date — finale section
+   Tunables: --std-mandala-spin, --std-dust-speed, --std-sway
+   ========================================================================== */
+
+.std-section {
+  --std-mandala-spin: 120s;
+  --std-dust-speed: 1;
+  --std-sway: 5.5s;
+  --std-draw: 2.8s;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(176, 95, 119, 0.28) 0%, transparent 55%),
+    linear-gradient(180deg, #7a1f32 0%, var(--color-maroon) 42%, #3a0c16 100%);
+  color: var(--color-cream);
+  padding-top: 2.5rem;
+}
+
+.std-scallop {
+  z-index: 2;
+}
+
+.std-jali {
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23c49d68' stroke-width='1'%3E%3Cpath d='M28 4c8 6 8 14 0 20-8-6-8-14 0-20z'/%3E%3Ccircle cx='28' cy='28' r='3'/%3E%3Cpath d='M4 28h48M28 4v48'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 56px;
+}
+
+.std-glow {
+  background: radial-gradient(circle, rgba(196, 157, 104, 0.22) 0%, transparent 70%);
+}
+
+.std-mandala {
+  opacity: 0.08;
+  will-change: transform;
+  animation: std-mandala-spin var(--std-mandala-spin) linear infinite;
+  animation-play-state: paused;
+}
+
+.std-section.std-active .std-mandala {
+  animation-play-state: running;
+}
+
+@keyframes std-mandala-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.std-dust-dot {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-name: std-dust-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.std-section.std-active .std-dust-dot {
+  animation-play-state: running;
+}
+
+@keyframes std-dust-rise {
+  0% {
+    transform: translate3d(0, 20px, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(8px, -70vh, 0);
+    opacity: 0;
+  }
+}
+
+/* Illustration line-draw + fills */
+.std-illustration {
+  overflow: visible;
+}
+
+.std-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.std-section.in .std-stroke {
+  animation: std-draw-line var(--std-draw, 2.8s) cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.std-section.in .mandap .std-stroke {
+  animation-delay: 0.05s;
+}
+.std-section.in .couple .std-stroke {
+  animation-delay: 0.35s;
+}
+.std-section.in .garland .std-stroke {
+  animation-delay: 0.55s;
+}
+.std-section.in .flame-group .std-stroke,
+.std-section.in .diyas .std-stroke,
+.std-section.in .kalash .std-stroke {
+  animation-delay: 0.75s;
+}
+.std-section.in .bells .std-stroke,
+.std-section.in .doves .std-stroke {
+  animation-delay: 0.9s;
+}
+
+@keyframes std-draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.std-fill {
+  opacity: 0;
+  transition: opacity 1s ease 1.6s;
+}
+
+.std-section.in .std-fill {
+  opacity: 1;
+}
+
+.std-illustration .garland-swag,
+.std-illustration .curtain,
+.std-illustration .jasmine {
+  animation: std-sway var(--std-sway) ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.std-illustration .curtain-r {
+  animation-delay: 0.6s;
+}
+.std-illustration .jasmine {
+  animation-duration: 4.8s;
+  animation-delay: 0.3s;
+}
+
+.std-illustration .bell {
+  animation: std-bell 2.8s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.std-illustration .flame {
+  animation: diya-flicker 1.6s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.std-illustration .dove {
+  animation: std-dove 5s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.std-section.std-active .std-illustration .garland-swag,
+.std-section.std-active .std-illustration .curtain,
+.std-section.std-active .std-illustration .jasmine,
+.std-section.std-active .std-illustration .bell,
+.std-section.std-active .std-illustration .flame,
+.std-section.std-active .std-illustration .dove {
+  animation-play-state: running;
+}
+
+@keyframes std-sway {
+  from {
+    transform: rotate(-1.5deg);
+  }
+  to {
+    transform: rotate(1.5deg);
+  }
+}
+
+@keyframes std-bell {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes std-dove {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-7px);
+  }
+}
+
+.std-eyebrow,
+.std-illust-wrap,
+.std-tagline,
+.std-date,
+.std-mini-count,
+.std-actions {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.95s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.95s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.std-meta,
+.std-mini-count,
+.std-tagline {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Solid cream + soft gold glow — clearer than shimmer-clipped script on maroon. */
+.std-eyebrow {
+  color: #fffbf2;
+  font-weight: 400;
+  text-shadow:
+    0 1px 0 rgba(196, 157, 104, 0.55),
+    0 2px 14px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(196, 157, 104, 0.35);
+  -webkit-text-stroke: 0.35px rgba(255, 251, 242, 0.35);
+  paint-order: stroke fill;
+}
+
+.std-section.in .std-eyebrow {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.05s;
+}
+.std-section.in .std-illust-wrap {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.15s;
+}
+.std-section.in .std-tagline {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.35s;
+}
+.std-section.in .std-date {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.45s;
+}
+.std-section.in .std-mini-count,
+.std-section.in .std-actions {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.65s;
+}
+
+.std-date-part {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  transition-delay: var(--d, 0s);
+}
+
+.std-section.in .std-date-part {
+  opacity: 1;
+  transform: none;
+}
+
+.std-btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.std-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 251, 242, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.std-btn:hover,
+.std-btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+.std-btn:hover::after,
+.std-btn:focus-visible::after {
+  transform: translateX(120%);
+}
+
+.std-btn:active {
+  transform: translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-petal-left,
+  .animate-petal-right,
+  .shimmer,
+  .digit-flip,
+  .seconds-pulse,
+  .gold-sweep::after,
+  .diya-flame,
+  .garland-sway,
+  .std-mandala,
+  .std-dust-dot,
+  .std-illustration .garland-swag,
+  .std-illustration .curtain,
+  .std-illustration .jasmine,
+  .std-illustration .bell,
+  .std-illustration .flame,
+  .std-illustration .dove {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    filter: none !important;
+  }
+
+  .ornament-stroke,
+  .std-stroke {
+    stroke-dashoffset: 0;
+    transition: none;
+    animation: none !important;
+  }
+
+  .ornament-dot,
+  .std-fill,
+  .std-eyebrow,
+  .std-illust-wrap,
+  .std-tagline,
+  .std-date,
+  .std-date-part,
+  .std-mini-count,
+  .std-actions {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .shimmer,
+  .std-section .shimmer {
+    -webkit-text-fill-color: unset;
+    background: none;
+  }
+
+  .std-dust {
+    display: none;
+  }
+}

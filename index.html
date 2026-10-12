@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- The couple's medallion. The 32px icon is cut from the portrait inside
+         the ring rather than the whole medallion: the border's paisley work
+         turns to noise at tab size. -->
+  <link rel="icon" href="/favicone.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dollsi &amp; Siddharth - Wedding Invitation - 26th November 2026" />
+  <title>Dollsi &amp; Siddharth - Wedding Invitation</title>
+
+  <!-- Link preview for WhatsApp / iMessage, where this invite gets shared. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dollsi &amp; Siddharth - Wedding Invitation" />
+  <meta property="og:description" content="Join us as we begin our forever - The Golden Celebrations Wedding Lawn." />
+  <meta property="og:image" content="/og-image-1.jpeg" />
+
+  <!-- Gate cover is the first paint; hero loads after open. Prefer AVIF. -->
+  <link
+    rel="preload"
+    as="image"
+    href="/door.avif"
+    type="image/avif"
+    fetchpriority="high"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Weights actually used: Cinzel 400/500, Cormorant 400/500 + italic, scripts regular.
+       Devanagari glyphs come from the system fallback stack on the shloka; Google's
+       Latin families don't carry that range — see report recommendation on Noto Serif Devanagari. -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Great+Vibes&family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
